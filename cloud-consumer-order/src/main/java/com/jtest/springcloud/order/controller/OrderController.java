@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class OrderController {
     //调用支付订单服务端的ip+端口号
-    public static final  String PAYMENT_URL = "http://localhost:8001";
+    public static final  String PAYMENT_URL = "http://JTEST-PAYMENT";
 
     @Autowired
     private RestTemplate restTemplate;

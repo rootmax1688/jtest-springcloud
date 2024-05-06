@@ -7,12 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import order.jtest.springclould.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 /*
@@ -27,10 +26,6 @@ public class PaymentControler {
 
     @Value("${server.port}")
     private String serverPort;
-
-    //注入服务发现的注解
-    @Autowired
-    private DiscoveryClient discoveryClient;
 
     @PostMapping("/payment/create")
     public CommonResult create(@RequestBody Payment dept) {
@@ -52,21 +47,6 @@ public class PaymentControler {
         } else {
             return new CommonResult(444, "查询失败", null);
         }
-    }
-
-
-    //获取服务信息
-    @GetMapping("/payment/discovery")
-    public  Object discovery(){
-        List<String> services = discoveryClient.getServices();
-        for (String s : services){
-            log.info("********注册到eureka中的服务中有:"+services);
-        }
-        List <ServiceInstance> instances = discoveryClient.getInstances("JTEST-PAYMENT");
-        for (ServiceInstance s: instances) {
-            log.info("当前服务的实例有"+s.getServiceId()+"\t"+s.getHost()+"\t"+s.getPort()+"\t"+s.getUri());
-        }
-        return this.discoveryClient;
     }
 
 }

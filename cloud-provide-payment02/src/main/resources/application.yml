@@ -1,10 +1,10 @@
 
 server:
-  port: 8001 #服务端口
+  port: 8002 #服务端口
 #spring相关配置
 spring:
   application:
-    name: jtest-payment  #服务名
+    name: jtest-payment #服务名
   datasource:
     username: root
     password: 123456
@@ -27,6 +27,6 @@ eureka:
       # 所有pojo别名类所在包
   instance:
     #服务名称修改
-    instance-id: payment8001
+    instance-id: payment8002
     #访问路径可以显示ip地址
     prefer-ip-address: true
